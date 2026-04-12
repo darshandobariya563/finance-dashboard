@@ -1,5 +1,8 @@
 import Card from '../common/Card';
-import { formatCurrency } from '../../utils/calculations';
+import {
+  formatCurrency,
+  formatPercent,
+} from '../../utils/calculations';
 
 function ExpenseChart({ expenseByCategory }) {
   const totalExpense = expenseByCategory.reduce(
@@ -49,14 +52,32 @@ function ExpenseChart({ expenseByCategory }) {
         <div className="expense-chart__legend">
           {expenseByCategory.slice(0, 6).map((item) => (
             <div key={item.category} className="legend-item">
-              <div className="legend-item__label">
-                <span
-                  className="legend-item__swatch"
-                  style={{ backgroundColor: item.color }}
-                />
-                <span>{item.category}</span>
+              <div className="legend-item__header">
+                <div className="legend-item__label">
+                  <span
+                    className="legend-item__swatch"
+                    style={{ backgroundColor: item.color }}
+                  />
+                  <span className="legend-item__name">{item.category}</span>
+                </div>
+                <div className="legend-item__metrics">
+                  <strong className="legend-item__value">
+                    {formatCurrency(item.total)}
+                  </strong>
+                  <span className="legend-item__share">
+                    {formatPercent((item.total / totalExpense) * 100)}
+                  </span>
+                </div>
               </div>
-              <strong>{formatCurrency(item.total)}</strong>
+              <div className="legend-item__bar" aria-hidden="true">
+                <span
+                  className="legend-item__bar-fill"
+                  style={{
+                    width: `${(item.total / totalExpense) * 100}%`,
+                    backgroundColor: item.color,
+                  }}
+                />
+              </div>
             </div>
           ))}
         </div>

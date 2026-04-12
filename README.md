@@ -107,7 +107,7 @@ All insights automatically respond to filter changes and transaction edits.
 - The frontend uses mock data and LocalStorage persistence instead of a live API so the project runs immediately after install.
 - SQL files are included as a production-ready database design and seed layer for future backend integration.
 - A root `index.html` was added because Vite requires it to run normally. The requested `public/index.html` is still included in the structure, and `publicDir` is disabled in `vite.config.js` to avoid build conflicts.
-- Currency formatting is displayed in USD for consistency across the sample dashboard and SQL seed data.
+- Currency formatting is displayed in INR with the `₹` symbol for consistency across the dashboard experience.
 
 ## Database Files
 
